@@ -5,4 +5,4 @@ corpus_path = os.path.split(os.path.abspath(__file__))[0]
 
 CORPUS = os.path.join(corpus_path, 'Sam_Altman.txt')
 
-api_key = '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'
+# api_key = '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'
