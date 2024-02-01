@@ -1,13 +1,16 @@
 import openai
 import streamlit as st
+from streamlit.logger import get_logger
 
 from config import CORPUS, api_key
 
-print(CORPUS)
+
+LOGGER = get_logger(__name__)
 
 with open(CORPUS, 'r', encoding='utf-8') as f:
     corpus = f.read()
 
+LOGGER.info(f'corpus: {CORPUS}')
 
 def run():
     st.set_page_config(
