@@ -18,34 +18,24 @@ def run():
         page_icon="👋",
     )
 
-    try:
-        openai.api_key = api_key
-    except ImportError:
-        raise ValueError(
-            "Could not import openai python package. "
-            "Please install it with `pip install openai`."
-        )
+    client = OpenAI(api_key=api_key)
+    
+    query = st.text_input('You can ask anything about Sam Altman(according to Wikipedia)', 'Hello.')
 
-    query = st.text_input('You can ask anything about Sam Altman(according to Wikipedia)', '')
 
     prompt = f"According to the text from Wikipedia, please answer the question below.\n\n" \
              f"Q: {query}\n\n" \
              f"Wikipedia text: {corpus}"
 
-    completion = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=prompt,
-        temperature=0.7,
-        stream=True
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        model="gpt-3.5-turbo",
     )
-
-    """
-    completion = openai.ChatCompletion.create(
-        model="text-davinci-002",
-        messages=messages,
-        stream=True
-    )
-    """
 
     answer_text = ""
 
