@@ -3,6 +3,8 @@ import streamlit as st
 
 from config import CORPUS, api_key
 
+print(CORPUS)
+
 with open(CORPUS, 'r', encoding='utf-8') as f:
     corpus = f.read()
 
