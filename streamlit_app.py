@@ -1,5 +1,5 @@
-import openai
 import streamlit as st
+from openai import OpenAI
 from streamlit.logger import get_logger
 
 from config import CORPUS, api_key
@@ -10,7 +10,7 @@ LOGGER = get_logger(__name__)
 with open(CORPUS, 'r', encoding='utf-8') as f:
     corpus = f.read()
 
-LOGGER.info(f'corpus: {CORPUS}')
+# LOGGER.info(f'corpus: {CORPUS}')
 
 def run():
     st.set_page_config(
@@ -35,6 +35,7 @@ def run():
             }
         ],
         model="gpt-3.5-turbo",
+        stream=True,
     )
 
     answer_text = ""
