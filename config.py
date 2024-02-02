@@ -5,8 +5,5 @@ import json
 prefix_path = os.path.split(os.path.abspath(__file__))[0]
 
 CORPUS = os.path.join(prefix_path, 'Sam_Altman.txt')
-api_json = os.path.join(prefix_path, 'api.json')
 
-with open(api_json, 'r', encoding='utf-8') as f:
-     api_key = json.load(f)['api_key']
 
