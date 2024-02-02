@@ -56,7 +56,9 @@ def run():
     if st.button("Answer"):
         LOGGER.info(f'user query: {query}')
         st.write_stream(text_generator)
-
+        
+        feedback = "Normal"
+        
         st.write("Is this conversation helpful so far?")
         if st.button("Good"):
             feedback = "Good"
@@ -64,7 +66,7 @@ def run():
         if st.button("Bad"):
             st.write("Sorry!😔")
             feedback = "Bad"
-
+        
         LOGGER.info(f'user feedback: {feedback}')
 
 
