@@ -21,7 +21,7 @@ def run():
     # LOGGER.info(f"api_key:{api_key}")
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     
-    query = st.text_input('You can ask anything about Sam Altman(according to Wikipedia)', 'Hello.')
+    query = st.text_input('You can ask anything about Sam Altman(according to Wikipedia)', 'Who is Sam Altman?')
 
 
     prompt = f"According to the text from Wikipedia, please answer the question below.\n\n" \
@@ -45,7 +45,9 @@ def run():
         if hasattr(chunk.choices[0].delta, "content"):
             answer_text = "".join([answer_text, chunk.choices[0].delta.content])
             st.write(answer_text)
-
+            
+    query.empty()
+    st.button("Re-run")
 
 if __name__ == "__main__":
     run()
