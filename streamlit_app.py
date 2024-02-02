@@ -31,8 +31,8 @@ def run():
         for chunk in chat_completion:
             if hasattr(chunk.choices[0].delta, "content"):
                 character = chunk.choices[0].delta.content
-                if character is str and len(character) > 0:
-                    yield chunk.choices[0].delta.content
+                if type(character) is str and len(character) > 0:
+                    yield character
 
     st.set_page_config(
         page_title="Hello",
