@@ -2,7 +2,7 @@ import streamlit as st
 from openai import OpenAI
 from streamlit.logger import get_logger
 
-from config import CORPUS, api_key
+from config import CORPUS
 
 
 LOGGER = get_logger(__name__)
@@ -18,7 +18,7 @@ def run():
         page_icon="👋",
     )
     LOGGER.info(f"api_key:{api_key}")
-    client = OpenAI(api_key=api_key)
+    client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     
     query = st.text_input('You can ask anything about Sam Altman(according to Wikipedia)', 'Hello.')
 
