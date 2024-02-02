@@ -17,7 +17,7 @@ def run():
         page_title="Hello",
         page_icon="👋",
     )
-    LOGGER.info(f"api_key:{api_key}")
+    # LOGGER.info(f"api_key:{api_key}")
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     
     query = st.text_input('You can ask anything about Sam Altman(according to Wikipedia)', 'Hello.')
