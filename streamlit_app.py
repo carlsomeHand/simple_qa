@@ -56,18 +56,12 @@ def run():
     if st.button("Answer"):
         LOGGER.info(f'user query: {query}')
         st.write_stream(text_generator)
-        
-        feedback = "Normal"
-        
+
         st.write("Is this conversation helpful so far?")
         if st.button("Good"):
-            feedback = "Good"
-            st.write("Thank you!😊")
+            LOGGER.info('user feedback: Good')
         if st.button("Bad"):
-            st.write("Sorry!😔")
-            feedback = "Bad"
-        
-        LOGGER.info(f'user feedback: {feedback}')
+            LOGGER.info('user feedback: Bad')
 
 
 if __name__ == "__main__":
