@@ -32,7 +32,7 @@ def run():
             if hasattr(chunk.choices[0].delta, "content"):
                 character = chunk.choices[0].delta.content
                 if type(character) is str and len(character) > 0:
-                    full_answer = "".join(full_answer, character)
+                    full_answer = "".join([full_answer, character])
                     yield character
 
         LOGGER.info(f'answer: {full_answer}')
@@ -65,7 +65,7 @@ def run():
             st.write("Sorry!😔")
             feedback = "Bad"
 
-    LOGGER.info(f'user feedback: {feedback}')
+        LOGGER.info(f'user feedback: {feedback}')
 
 
 if __name__ == "__main__":
