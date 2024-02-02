@@ -41,7 +41,7 @@ def run():
 
     answer_text = ""
 
-    for chunk in completion:
+    for chunk in chat_completion:
         if hasattr(chunk.choices[0].delta, "content"):
             answer_text = "".join([answer_text, chunk.choices[0].delta.content])
             st.write(answer_text)
