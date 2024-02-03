@@ -53,7 +53,7 @@ def run():
              f"Wikipedia text: {corpus}"
 
     # 通过点击按钮，调用生成器形成流式输出
-    if st.button("Answer"):
+    if st.button("Answer", type="primary"):
         LOGGER.info(f'user query: {query}')
         st.write_stream(text_generator)
 
