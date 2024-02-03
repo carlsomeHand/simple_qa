@@ -14,8 +14,8 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
 def run():
-    def click_button():
-        st.session_state.clicked = True
+    def set_state(i):
+        st.session_state.stage = i
     def text_generator():
         chat_completion = client.chat.completions.create(
             messages=[
@@ -39,6 +39,8 @@ def run():
 
         LOGGER.info(f'answer: {full_answer}')
 
+    st.session_state.stage = 0
+    
     st.set_page_config(
         page_title="Hello",
         page_icon="👋",
@@ -53,13 +55,10 @@ def run():
     prompt = f"According to the text from Wikipedia, please answer the question below.\n\n" \
              f"Q: {query}\n\n" \
              f"Wikipedia text: {corpus}"
-
-    if 'clicked' not in st.session_state:
-        st.session_state.clicked = False
         
     # 通过点击按钮，调用生成器形成流式输出
-    st.button("Get answer", on_click=click_button)
-    if st.session_state.clicked:
+    st.button("Get answer", on_click=set_state, args=[1])
+    if st.session_state.stage == 1:
         LOGGER.info(f'user query: {query}')
         st.write_stream(text_generator)
         st.write("\n Is this conversation helpful so far?")
