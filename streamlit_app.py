@@ -65,13 +65,14 @@ def run():
         st.write_stream(text_generator)
         set_state(2)
     if st.session_state.stage == 2:
-        st.write("\n Is this conversation helpful so far?")
-        if st.button("Good", on_click=set_state, args=[0]):
-            LOGGER.info('user feedback: Good')
-            st.rerun()
-        if st.button("Bad", on_click=set_state, args=[0]):
-            LOGGER.info('user feedback: Bad')
-            st.rerun()
+        # st.write("\nIs this conversation helpful so far?")
+        feedback = st.selectbox(
+        'Is this conversation helpful so far?',
+        ['good', 'bad'],
+        on_change=set_state, args=[0]
+        )
+        LOGGER.info(f'user feedback: {feedback}')
+
 
 
 if __name__ == "__main__":
