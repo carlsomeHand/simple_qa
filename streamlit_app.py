@@ -14,8 +14,6 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
 def run():
-    def set_state(i):
-        st.session_state.stage = i
     def text_generator():
         chat_completion = client.chat.completions.create(
             messages=[
@@ -38,9 +36,6 @@ def run():
                     yield character
 
         LOGGER.info(f'answer: {full_answer}')
-        
-    if 'stage' not in st.session_state:
-        st.session_state.stage = 0
     
     st.set_page_config(
         page_title="Hello",
@@ -58,21 +53,9 @@ def run():
              f"Wikipedia text: {corpus}"
         
     # 通过点击按钮，调用生成器形成流式输出
-    if st.session_state.stage == 0:
-        st.button("Get answer", on_click=set_state, args=[1])
-    if st.session_state.stage == 1:
+    if st.button("Get answer"):
         LOGGER.info(f'user query: {query}')
         st.write_stream(text_generator)
-        set_state(2)
-    if st.session_state.stage == 2:
-        feedback = st.selectbox(
-        'Is this conversation helpful so far?',
-        ['good', 'bad'],
-        on_change=set_state, args=[3]
-        )
-    if st.session_state.stage == 3:
-        LOGGER.info(f'user feedback: {feedback}')
-        set_state(0)
 
 if __name__ == "__main__":
     run()
