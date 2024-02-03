@@ -53,16 +53,16 @@ def run():
              f"Wikipedia text: {corpus}"
 
     # 通过点击按钮，调用生成器形成流式输出
-    if st.button("Answer", type="primary"):
+    flag = st.button("Get answer")
+    if flag:
         LOGGER.info(f'user query: {query}')
         st.write_stream(text_generator)
-
-    st.write("Is this conversation helpful so far?")
-    if st.button("Good"):
-        LOGGER.info('user feedback: Good')
-        st.rerun()
-    if st.button("Bad"):
-        LOGGER.info('user feedback: Bad')
+        st.write("\n Is this conversation helpful so far?")
+        if st.button("Good"):
+            LOGGER.info('user feedback: Good')
+            st.rerun()
+        if st.button("Bad"):
+            LOGGER.info('user feedback: Bad')
 
 
 if __name__ == "__main__":
