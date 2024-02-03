@@ -14,6 +14,8 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
 def run():
+    def click_button():
+        st.session_state.clicked = True
     def text_generator():
         chat_completion = client.chat.completions.create(
             messages=[
@@ -43,7 +45,7 @@ def run():
     )
 
     st.title("Welcome to the Chatbot👋")
-
+    
     # 文本输入
     query = st.text_input('You can ask anything about Sam Altman(according to Wikipedia) by Chatgpt',
                           'Who is Sam Altman?')
@@ -52,9 +54,12 @@ def run():
              f"Q: {query}\n\n" \
              f"Wikipedia text: {corpus}"
 
+    if 'clicked' not in st.session_state:
+        st.session_state.clicked = False
+        
     # 通过点击按钮，调用生成器形成流式输出
-    flag = st.button("Get answer", type="primary")
-    if flag:
+    st.button("Get answer", on_click=click_button)
+    if st.session_state.clicked:
         LOGGER.info(f'user query: {query}')
         st.write_stream(text_generator)
         st.write("\n Is this conversation helpful so far?")
