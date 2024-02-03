@@ -58,7 +58,8 @@ def run():
              f"Wikipedia text: {corpus}"
         
     # 通过点击按钮，调用生成器形成流式输出
-    st.button("Get answer", on_click=set_state, args=[1])
+    if st.session_state.stage == 0:
+        st.button("Get answer", on_click=set_state, args=[1])
     if st.session_state.stage == 1:
         LOGGER.info(f'user query: {query}')
         st.write_stream(text_generator)
