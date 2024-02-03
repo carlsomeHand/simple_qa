@@ -62,6 +62,8 @@ def run():
     if st.session_state.stage == 1:
         LOGGER.info(f'user query: {query}')
         st.write_stream(text_generator)
+        set_state(2)
+    if st.session_state.stage == 2:
         st.write("\n Is this conversation helpful so far?")
         if st.button("Good", on_click=set_state, args=[0]):
             LOGGER.info('user feedback: Good')
