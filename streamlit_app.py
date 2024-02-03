@@ -38,8 +38,9 @@ def run():
                     yield character
 
         LOGGER.info(f'answer: {full_answer}')
-
-    st.session_state.stage = 0
+        
+    if 'stage' not in st.session_state:
+        st.session_state.stage = 0
     
     st.set_page_config(
         page_title="Hello",
@@ -62,9 +63,9 @@ def run():
         LOGGER.info(f'user query: {query}')
         st.write_stream(text_generator)
         st.write("\n Is this conversation helpful so far?")
-        if st.button("Good"):
+        if st.button("Good", on_click=set_state, args=[0]):
             LOGGER.info('user feedback: Good')
-        if st.button("Bad"):
+        if st.button("Bad", on_click=set_state, args=[0]):
             LOGGER.info('user feedback: Bad')
 
 
