@@ -68,8 +68,10 @@ def run():
         st.write("\n Is this conversation helpful so far?")
         if st.button("Good", on_click=set_state, args=[0]):
             LOGGER.info('user feedback: Good')
+            st.rerun()
         if st.button("Bad", on_click=set_state, args=[0]):
             LOGGER.info('user feedback: Bad')
+            st.rerun()
 
 
 if __name__ == "__main__":
